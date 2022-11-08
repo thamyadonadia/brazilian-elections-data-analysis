@@ -1,0 +1,15 @@
+1. organizar a main - parâmetros passados na linha de comando 
+2. leitura dos arquivos de candidatos e das votações 
+3. processamento de dados para gerar os relatórios e imprimir na saída padrão
+
+
+arquivos 
+1. App.java - contém a main e organiza os parâmetros
+2. Candidato.java - informações de cada candidato OK
+3. Partido.java - informações de cada partido OK
+4. Leitor.java - a ver sobre 
+5. Eleição.java - informações da eleição no estado - lista encadeada 
+6. Relatório.java - gerador de relatórios 
+
+Trabalhar com exceções
+Pacotes
