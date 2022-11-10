@@ -1,0 +1,12 @@
+arquivo de candidatos 
+
+CD_CARGO                  (14): 6 para deputadofederal e 7 para deputado estadual;
+NR_CANDIDATO              (17): número do candidato;
+NM_URNA_CANDIDATO         (19): nome do candidato na urna;
+CD_SIT_TOT_TURNO          (23): 2 ou 3 representando candidato eleito;
+CD_DETALHE_SITUACAO_CAND  (25): processar apenas aqueles com os valores 2 ou 16 que representam candidatos com candidatura deferida;
+SG_PARTIDO                (29): sigla do partido;
+NR_PARTIDO                (30): número do partido;
+NR_FEDERACAO              (31): número da federação, com -1 representando candidato em partido isolado (que não participa de federação)
+DT_NASCIMENTO             (43): data de nascimento do candidato no formato dd/mm/aaaa;
+CD_GENERO                 (46); 2representando masculino e 4 representando feminino

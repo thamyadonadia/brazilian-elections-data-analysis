@@ -18,6 +18,7 @@
 - [ ] Tratamento de exceções    
 - [ ] Comentar código    
 - [ ] Escrever relatório
+- [ ] Montar makefile 
 
 ### Dúvidas 
 - Implementar interface, herança e classe abstrata??

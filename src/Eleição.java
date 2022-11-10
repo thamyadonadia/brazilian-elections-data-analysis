@@ -16,13 +16,13 @@ public class Eleição {
         this.tipoConsulta = tipoConsulta;
     }
 
-
     public LinkedList<Candidato> getCandidatos(){
-        return candidatos;
+        return new LinkedList<Candidato>(candidatos);
     }
 
-    public void setCandidatos(LinkedList<Candidato> candidatos){
-        this.candidatos = candidatos;
+    // talvez trocar o nome do parâmetro?
+    public void adicionaCandidatos(Candidato c){ 
+        candidatos.add(c);
     }
 
     public LocalDate getDia(){
@@ -30,11 +30,13 @@ public class Eleição {
     }
 
     public LinkedList<Partido> getPartidos(){
-        return partidos;
+        return new LinkedList<Partido>(partidos);
+
     }
 
-    public void setPartidos(LinkedList<Partido> partidos){
-        this.partidos = partidos;
+    // talvez trocar o nome do parâmetro?
+    public void adicionaPartidos(Partido p){
+        partidos.add(p);
     }
 
     public String getTipoConsulta(){

@@ -5,17 +5,17 @@ import java.time.LocalDate;
 public class Candidato {
     private String nomeUrna;
     private int cargo;
-    private int número;
+    private int númeroUrna;
     private Partido relaçãoPartidária;
     private LocalDate nascimento;
     private int situaçãoEleitoral;
     private int genero;
 
 
-    public Candidato(String nomeUrna, int cargo, int número, Partido relaçãoPartidária, LocalDate nascimento, int situaçãoEleitoral, int genero) {
+    public Candidato(String nomeUrna, int cargo, int númeroUrna, Partido relaçãoPartidária, LocalDate nascimento, int situaçãoEleitoral, int genero) {
         this.nomeUrna = nomeUrna;
         this.cargo = cargo;
-        this.número = número;
+        this.númeroUrna = númeroUrna;
         this.relaçãoPartidária = relaçãoPartidária;
         this.nascimento = nascimento;
         this.situaçãoEleitoral = situaçãoEleitoral;
@@ -33,8 +33,8 @@ public class Candidato {
     }
 
 
-    public int getNúmero() {
-        return número;
+    public int getNúmeroUrna() {
+        return númeroUrna;
     }
 
 
