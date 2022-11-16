@@ -1,9 +1,11 @@
-package registrados;
+package br.ufes.nossonome.deputados.registrados;
 
 public class Partido {
     private int cargo;
     private int númeroVotável;
     private int qtdVotos;
+    private String siglaPartido;
+    private int numPartido;
     
     public Partido(int cargo, int númeroVotável, int qtdVotos) {
         this.cargo = cargo;

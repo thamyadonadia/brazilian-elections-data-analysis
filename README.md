@@ -9,7 +9,7 @@
 - [ ] Relatório.java - gerador de relatórios      
     
 ### Tarefas 
-- [ ] Estudar leitura de arquivos      
+- [X] Estudar leitura de arquivos      
 - [ ] Estudar sobre o .jar - tentar ver material do JP
 
 ### Etapas 
@@ -22,3 +22,4 @@
 
 ### Dúvidas 
 - Implementar interface, herança e classe abstrata??
+- Nos packages, precisa ser src/br/ufes/"nosso nome"/deputados

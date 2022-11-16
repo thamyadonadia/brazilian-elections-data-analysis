@@ -10,3 +10,9 @@ NR_PARTIDO                (30): número do partido;
 NR_FEDERACAO              (31): número da federação, com -1 representando candidato em partido isolado (que não participa de federação)
 DT_NASCIMENTO             (43): data de nascimento do candidato no formato dd/mm/aaaa;
 CD_GENERO                 (46); 2representando masculino e 4 representando feminino
+
+
+arquivo de votos
+CD_CARGO:  6 para deputado federal e 7 para deputado estadual;
+NR_VOTAVEL: o número do candidato no caso de voto nominal ou o número do partido se for voto na legenda. Os números 95, 96, 97, 98 representam casos de votos em branco, nulos ou anulados, e, como só estamos nos concentrando nos votos válidos, linhas com esses números devem ser ignoradas.
+QT_VOTOS: número de votos(no candidato ou no partido) na sessão.

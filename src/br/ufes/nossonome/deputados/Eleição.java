@@ -1,8 +1,9 @@
+package br.ufes.nossonome.deputados;
+
 import java.time.LocalDate;
 import java.util.LinkedList;
 
-import registrados.Candidato;
-import registrados.Partido;
+import br.ufes.nossonome.deputados.registrados.*;
 
 public class Eleição {
     private LinkedList<Candidato> candidatos;
@@ -20,7 +21,7 @@ public class Eleição {
         return new LinkedList<Candidato>(candidatos);
     }
 
-    // talvez trocar o nome do parâmetro?
+    // TODO: talvez trocar o nome do parâmetro?
     public void adicionaCandidatos(Candidato c){ 
         candidatos.add(c);
     }
@@ -34,7 +35,7 @@ public class Eleição {
 
     }
 
-    // talvez trocar o nome do parâmetro?
+    //  TODO: talvez trocar o nome do parâmetro?
     public void adicionaPartidos(Partido p){
         partidos.add(p);
     }
