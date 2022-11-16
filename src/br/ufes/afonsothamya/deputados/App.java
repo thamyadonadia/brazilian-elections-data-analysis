@@ -1,17 +1,17 @@
-package br.ufes.nossonome.deputados;
+package br.ufes.afonsothamya.deputados;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        if(args.length!=3){
+        if (args.length != 3) {
             System.out.println("uso: java -jar deputados.jar --<modalidade> <arquivo_candidatos> <arquivo_votação>");
             System.exit(1);
         }
 
         // obtenção dos dados passados como parâmetros na entrada padrão
-        String modalidade =  args[0];
+        String modalidade = args[0];
         String caminhoArquivoCandidatos = args[1];
         String caminhoArquivoVotos = args[2];
 

@@ -11,6 +11,7 @@
 ### Tarefas 
 - [X] Estudar leitura de arquivos      
 - [ ] Estudar sobre o .jar - tentar ver material do JP
+- [ ] Mudar nome das variáveis 
 
 ### Etapas 
 - [ ] Arquitetura do projeto     
