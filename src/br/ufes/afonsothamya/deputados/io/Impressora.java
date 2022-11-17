@@ -1,6 +1,6 @@
 package br.ufes.afonsothamya.deputados.io;
 
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 import br.ufes.afonsothamya.deputados.Eleicao;
@@ -9,32 +9,30 @@ import br.ufes.afonsothamya.deputados.registrados.*;
 public class Impressora {
     public void imprimeCandidatosEleitos(Eleicao deputados) {
         LinkedList<Candidato> candidatos;
-        int contador = 0;
+        int contador = 1;
 
         candidatos = deputados.getCandidatos();
 
-        candidatos.sort(null);
+        candidatos.sort(Comparator.comparing(Candidato::getNumVotos));
 
-        Collections.sort(null, null);
+        System.out.println("Número de vagas: " + "test" + "\n\n");
+
+        if (deputados.getTipoConsulta() == "--federal")
+            System.out.println("Deputados federais eleitos:");
+        else
+            System.out.println("Deputados estaduais eleitos:");
 
         for (Candidato c : candidatos) {
-
-            if (c.getCargo() == 6)
-                System.out.println("Deputados federais eleitos:");
-            else
-                System.out.println("Deputados estaduais eleitos:");
 
             if ((c.getSituaçãoEleitoral() == 2) || (c.getSituaçãoEleitoral() == 3)) {
                 System.out.print(contador + " - ");
 
-                if (c.getNumFederação() == -1)
+                if (c.getNumFederação() != -1)
                     System.out.print("*");
-                // problema - o candidato não tem o campo "quantidade de votos" K
-                else
-                    System.out.println(c.getNomeUrna() + "(" + c.getSiglaPartido() + "," + c.getNumVotos() + "votos)");
-            }
 
-            contador++;
+                System.out.println(c.getNomeUrna() + " (" + c.getSiglaPartido() + ", " + c.getNumVotos() + " votos)");
+                contador++;
+            }
         }
     }
 }

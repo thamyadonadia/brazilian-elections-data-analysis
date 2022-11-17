@@ -16,6 +16,8 @@ public class Eleicao {
     public Eleicao(LocalDate dia, String tipoConsulta) {
         this.dia = dia;
         this.tipoConsulta = tipoConsulta;
+        this.candidatos = new HashMap<Integer, Candidato>();
+        this.partidos = new LinkedList<Partido>();
     }
 
     public LinkedList<Candidato> getCandidatos() {
@@ -54,6 +56,20 @@ public class Eleicao {
         }
 
         return null;
+    }
+
+    public Partido temEssePartido(int nr_Partido) {
+        for (Partido p : partidos) {
+            if (p.getNumPartido() == nr_Partido) {
+                return p;
+            }
+        }
+
+        return null;
+    }
+
+    public Candidato getCandidatoKey(int nr_votavel) {
+        return this.candidatos.get(nr_votavel);
     }
 
 }

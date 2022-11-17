@@ -2,6 +2,7 @@ package br.ufes.afonsothamya.deputados.io;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import br.ufes.afonsothamya.deputados.Eleicao;
 import br.ufes.afonsothamya.deputados.registrados.*;
@@ -56,15 +57,16 @@ public class Leitor {
             while (linha != null) {
                 colunas = linha.split(";");
 
-                if (cargo == Integer.parseInt(colunas[13])
-                        && (2 == Integer.parseInt(colunas[24]) || 16 == Integer.parseInt(colunas[24]))) {
-                    pessoa = new Candidato(colunas[18].replace("\"", ""), cargo, Integer.parseInt(colunas[16]),
-                            Integer.parseInt(colunas[29]), colunas[28].replace("\"", ""), LocalDate.parse(colunas[42]),
-                            Integer.parseInt(colunas[22]), Integer.parseInt(colunas[45]),
-                            Integer.parseInt(colunas[30]));
+                if (cargo == adaptaStringInt(colunas[13])
+                        && (2 == adaptaStringInt(colunas[24]) || 16 == adaptaStringInt(colunas[24]))) {
+                    pessoa = new Candidato(colunas[18].replace("\"", ""), cargo, adaptaStringInt(colunas[16]),
+                            adaptaStringInt(colunas[27]), colunas[28].replace("\"", ""),
+                            LocalDate.parse(colunas[42].replace("\"", ""), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                            adaptaStringInt(colunas[56]), adaptaStringInt(colunas[45]),
+                            adaptaStringInt(colunas[30]));
                     grupo = deputados.temEssePartido(pessoa.getSiglaPartido());
                     if (grupo == null) {
-                        grupo = new Partido(cargo, Integer.parseInt(colunas[29]), colunas[28].replace("\"", ""));
+                        grupo = new Partido(cargo, adaptaStringInt(colunas[27]), colunas[28].replace("\"", ""));
                         deputados.adicionaPartidos(grupo);
                     }
                     grupo.adicionaCandidatos(pessoa);
@@ -86,6 +88,7 @@ public class Leitor {
         int cargo;
         String[] colunas;
         Partido grupo; // mudar nome da variável "p" Feito
+        Candidato pessoa;
 
         if (deputados.getTipoConsulta() == "--federal")
             cargo = 6;
@@ -100,9 +103,15 @@ public class Leitor {
                 colunas = linha.split(";");
 
                 // ignorar linhas com o NR_VOTAVEL == 95, 96, 97, 98 Feito
-                if (cargo == Integer.parseInt(colunas[13])
-                        && (94 < Integer.parseInt(colunas[20]) && 99 > Integer.parseInt(colunas[20]))) {
-
+                if (cargo == adaptaStringInt(colunas[17])
+                        && !(94 < adaptaStringInt(colunas[19]) && 99 > adaptaStringInt(colunas[19]))) {
+                    pessoa = deputados.getCandidatoKey(adaptaStringInt(colunas[19]));
+                    if (pessoa == null) {
+                        grupo = deputados.temEssePartido(adaptaStringInt(colunas[19]));
+                        grupo.addNumVotos(adaptaStringInt(colunas[21]));
+                    } else {
+                        pessoa.addNumVotos(adaptaStringInt(colunas[21]));
+                    }
                 }
 
                 linha = brArquivoCandidatos.readLine();
@@ -112,5 +121,12 @@ public class Leitor {
             System.out.println("Erro de I/O");
             System.exit(1);
         }
+    }
+
+    public static Integer adaptaStringInt(String numero) {
+        int result;
+
+        result = Integer.parseInt(numero.replace("\"", ""));
+        return result;
     }
 }

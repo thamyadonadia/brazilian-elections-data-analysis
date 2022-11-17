@@ -4,14 +4,14 @@ import java.util.LinkedList;
 
 public class Partido {
     private int cargo;
-    private int qtdVotos;
+    private int numVotos;
     private String siglaPartido;
     private int numPartido;
     private LinkedList<Candidato> candidatos;
 
     public Partido(int cargo, int numPartido, String siglaPartido) {
         this.cargo = cargo;
-        this.qtdVotos = 0;
+        this.numVotos = 0;
         this.siglaPartido = siglaPartido;
         this.numPartido = numPartido;
         this.candidatos = new LinkedList<>();
@@ -25,12 +25,12 @@ public class Partido {
         this.cargo = cargo;
     }
 
-    public int getQtdVotos() {
-        return qtdVotos;
+    public int getnumVotos() {
+        return numVotos;
     }
 
-    public void setQtdVotos(int qtdVotos) {
-        this.qtdVotos = qtdVotos;
+    public void addNumVotos(int numVotos) {
+        this.numVotos += numVotos;
     }
 
     public String getSiglaPartido() {
