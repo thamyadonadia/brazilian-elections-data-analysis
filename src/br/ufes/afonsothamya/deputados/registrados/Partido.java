@@ -2,7 +2,7 @@ package br.ufes.afonsothamya.deputados.registrados;
 
 import java.util.LinkedList;
 
-public class Partido {
+public class Partido implements Comparable<Partido> {
     private int cargo;
     private int numVotos;
     private String siglaPartido;
@@ -61,4 +61,22 @@ public class Partido {
         return votosN;
     }
 
+    public int getNmrCandidatosEleitos() {
+        int eleitos = 0;
+        for (Candidato c : candidatos) {
+            if (c.ehEleito())
+                eleitos++;
+        }
+        return eleitos;
+    }
+
+    @Override
+    public int compareTo(Partido o) {
+        int result = 0;
+        result = (o.getQtdVotosNominais() + o.getnumVotos()) - (this.getQtdVotosNominais() + this.getnumVotos());
+        if (result != 0) {
+            return result;
+        } else
+            return this.getNumPartido() - o.getNumPartido();
+    }
 }

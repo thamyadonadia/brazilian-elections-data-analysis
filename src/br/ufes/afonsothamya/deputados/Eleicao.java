@@ -12,12 +12,14 @@ public class Eleicao {
     private LocalDate dia;
     private LinkedList<Partido> partidos;
     private String tipoConsulta;
+    private int vagas;
 
     public Eleicao(LocalDate dia, String tipoConsulta) {
         this.dia = dia;
         this.tipoConsulta = tipoConsulta;
         this.candidatos = new HashMap<Integer, Candidato>();
         this.partidos = new LinkedList<Partido>();
+        this.vagas = 0;
     }
 
     public LinkedList<Candidato> getCandidatos() {
@@ -27,6 +29,9 @@ public class Eleicao {
     // TODO: talvez trocar o nome do parâmetro?
     public void adicionaCandidatos(Candidato c) {
         candidatos.put(c.getNúmeroUrna(), c);
+        if ((c.getSituaçãoEleitoral() == 2) || (c.getSituaçãoEleitoral() == 3)) {
+            this.vagas++;
+        }
     }
 
     public LocalDate getDia() {
@@ -47,10 +52,14 @@ public class Eleicao {
         return tipoConsulta;
     }
 
+    public int getVagas() {
+        return vagas;
+    }
+
     // criado pra conseguir gerar os partidos
     public Partido temEssePartido(String nm_Partido) {
         for (Partido p : partidos) {
-            if (p.getSiglaPartido() == nm_Partido) {
+            if (p.getSiglaPartido().equals(nm_Partido)) {
                 return p;
             }
         }
@@ -64,7 +73,6 @@ public class Eleicao {
                 return p;
             }
         }
-
         return null;
     }
 

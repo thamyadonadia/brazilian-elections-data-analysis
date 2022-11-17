@@ -3,8 +3,8 @@ package br.ufes.afonsothamya.deputados;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import br.ufes.afonsothamya.deputados.io.Impressora;
 import br.ufes.afonsothamya.deputados.io.Leitor;
+import br.ufes.afonsothamya.deputados.relatorios.Relatorio;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -29,8 +29,10 @@ public class App {
         reader.leituraCandidatos(processo);
         reader.leituraVotos(processo);
 
-        Impressora printer = new Impressora();
-        printer.imprimeCandidatosEleitos(processo);
+        Relatorio sintetizador = new Relatorio(processo);
+        sintetizador.deputadosEleitos();
+        sintetizador.deputadosMaisVotados();
+        sintetizador.partidosEleitos();
 
     }
 }

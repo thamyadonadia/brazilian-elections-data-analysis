@@ -2,8 +2,9 @@ package br.ufes.afonsothamya.deputados.registrados;
 
 import java.time.LocalDate;
 
-public class Candidato {
+public class Candidato implements Comparable<Candidato> {
     private String nomeUrna;
+    private String nomeCompleto;
     private int cargo;
     private int númeroUrna;
     private Partido relaçãoPartidária;
@@ -15,9 +16,11 @@ public class Candidato {
     private int numFederação;
     private int numVotos;
 
-    public Candidato(String nomeUrna, int cargo, int númeroUrna, int numPartido, String siglaPartido,
+    public Candidato(String nomeUrna, String nomeCompleto, int cargo, int númeroUrna, int numPartido,
+            String siglaPartido,
             LocalDate nascimento, int situaçãoEleitoral, int genero, int numFederação) {
         this.nomeUrna = nomeUrna;
+        this.nomeCompleto = nomeCompleto;
         this.cargo = cargo;
         this.númeroUrna = númeroUrna;
         this.numPartido = numPartido;
@@ -77,11 +80,28 @@ public class Candidato {
         this.numVotos += numVotos;
     }
 
+    public String getNomeCompleto() {
+        return nomeCompleto;
+    }
+
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
+    }
+
     public void setRelaçãoPartidária(Partido relaçãoPartidária) {
         this.relaçãoPartidária = relaçãoPartidária;
     }
 
     public int comparaNumVotos(Candidato comparado) {
         return this.numVotos - comparado.numVotos;
+    }
+
+    public boolean ehEleito() {
+        return (this.getSituaçãoEleitoral() == 2) || (this.getSituaçãoEleitoral() == 3);
+    }
+
+    @Override
+    public int compareTo(Candidato o) {
+        return o.numVotos - this.numVotos;
     }
 }
