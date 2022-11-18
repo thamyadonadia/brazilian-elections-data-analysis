@@ -58,10 +58,13 @@ public class Leitor {
                 colunas = linha.split(";");
 
                 grupo = deputados.temEssePartido(colunas[28].replace("\"", ""));
+
+                // caso o partido ainda não exista, ele é criado
                 if (grupo == null) {
                     grupo = new Partido(cargo, adaptaStringInt(colunas[27]), colunas[28].replace("\"", ""));
                     deputados.adicionaPartidos(grupo);
                 }
+
                 if (cargo == adaptaStringInt(colunas[13])
                         && (2 == adaptaStringInt(colunas[24]) || 16 == adaptaStringInt(colunas[24]))) {
                     pessoa = new Candidato(colunas[18].replace("\"", ""), colunas[17].replace("\"", ""), cargo,
@@ -70,51 +73,53 @@ public class Leitor {
                             LocalDate.parse(colunas[42].replace("\"", ""), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
                             adaptaStringInt(colunas[56]), adaptaStringInt(colunas[45]),
                             adaptaStringInt(colunas[30]));
-                    grupo.adicionaCandidatos(pessoa);
-                    deputados.adicionaCandidatos(pessoa);
+
+                    grupo.adicionaCandidatos(pessoa); // adiciona o candidato no partido dele
+                    deputados.adicionaCandidatos(pessoa); // adiciona o candidato na lista de candidatos da eleição
 
                 }
 
                 linha = brArquivoCandidatos.readLine();
-
             }
 
         } catch (IOException e) {
             System.out.println("Erro de I/O");
             System.exit(1);
         }
-
     }
 
-    // função para realizar a leitura dos arquivos
+    // função para realizar a leitura do arquivo de votos
     public void leituraVotos(Eleicao deputados) {
         int cargo;
         String[] colunas;
-        Partido grupo; // mudar nome da variável "p" Feito
+        Partido grupo;
         Candidato pessoa;
 
         if (deputados.getTipoConsulta().equals("--federal"))
             cargo = 6;
-
         else
             cargo = 7;
 
         try {
-
             String linha = brArquivoVotos.readLine();
             linha = brArquivoVotos.readLine();
+
             while (linha != null) {
                 colunas = linha.split(";");
 
-                // ignorar linhas com o NR_VOTAVEL == 95, 96, 97, 98 Feito
                 if ((cargo == adaptaStringInt(colunas[17]))
                         && !(94 < adaptaStringInt(colunas[19]) && 99 > adaptaStringInt(colunas[19]))) {
+
+                    // coluna 19 representa o número de urna do candidato == key pra hash map
                     pessoa = deputados.getCandidatoKey(adaptaStringInt(colunas[19]));
+
                     if (pessoa == null) {
                         grupo = deputados.temEssePartido(adaptaStringInt(colunas[19]));
+
                         if (grupo != null) {
                             grupo.addNumVotos(adaptaStringInt(colunas[21]));
                         }
+
                     } else {
                         pessoa.addNumVotos(adaptaStringInt(colunas[21]));
                     }

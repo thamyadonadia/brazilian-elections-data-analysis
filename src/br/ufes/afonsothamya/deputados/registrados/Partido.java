@@ -72,11 +72,13 @@ public class Partido implements Comparable<Partido> {
 
     @Override
     public int compareTo(Partido o) {
-        int result = 0;
-        result = (o.getQtdVotosNominais() + o.getnumVotos()) - (this.getQtdVotosNominais() + this.getnumVotos());
+        int result = (o.getQtdVotosNominais() + o.getnumVotos()) - (this.getQtdVotosNominais() + this.getnumVotos());
+
         if (result != 0) {
             return result;
-        } else
+        } else {
             return this.getNumPartido() - o.getNumPartido();
+        }
     }
+
 }

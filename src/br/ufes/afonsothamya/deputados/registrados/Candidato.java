@@ -17,8 +17,7 @@ public class Candidato implements Comparable<Candidato> {
     private int numVotos;
 
     public Candidato(String nomeUrna, String nomeCompleto, int cargo, int númeroUrna, int numPartido,
-            String siglaPartido,
-            LocalDate nascimento, int situaçãoEleitoral, int genero, int numFederação) {
+            String siglaPartido, LocalDate nascimento, int situaçãoEleitoral, int genero, int numFederação) {
         this.nomeUrna = nomeUrna;
         this.nomeCompleto = nomeCompleto;
         this.cargo = cargo;
@@ -102,6 +101,12 @@ public class Candidato implements Comparable<Candidato> {
 
     @Override
     public int compareTo(Candidato o) {
-        return o.numVotos - this.numVotos;
+        int result = o.numVotos - this.numVotos;
+
+        if (result == 0) {
+            return this.getNascimento().compareTo(o.getNascimento());
+        } else {
+            return result;
+        }
     }
 }
