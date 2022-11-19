@@ -24,3 +24,6 @@
 ### Dúvidas 
 - Implementar interface, herança e classe abstrata??
 - Nos packages, precisa ser src/br/ufes/"nosso nome"/deputados
+
+### Extra
+- Para rodar o .jar: java -jar brazilian-elections-data-analysis.jar --estadual tests/consulta_cand_2022_ES.csv tests/votacao_secao_2022_ES.csv 15/11/2022

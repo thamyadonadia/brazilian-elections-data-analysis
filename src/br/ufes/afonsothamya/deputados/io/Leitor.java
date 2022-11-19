@@ -76,7 +76,7 @@ public class Leitor {
 
                     grupo.adicionaCandidatos(pessoa); // adiciona o candidato no partido dele
                     deputados.adicionaCandidatos(pessoa); // adiciona o candidato na lista de candidatos da eleição
-
+                    pessoa.setRelaçãoPartidária(grupo);
                 }
 
                 linha = brArquivoCandidatos.readLine();

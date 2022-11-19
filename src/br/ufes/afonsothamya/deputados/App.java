@@ -33,6 +33,8 @@ public class App {
         sintetizador.deputadosEleitos();
         sintetizador.deputadosMaisVotados();
         sintetizador.partidosEleitos();
+        sintetizador.primeiroUltimoPartidos();
+        sintetizador.eleitosPorSexo();
 
     }
 }

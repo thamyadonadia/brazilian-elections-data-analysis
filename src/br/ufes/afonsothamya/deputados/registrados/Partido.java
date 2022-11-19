@@ -64,21 +64,26 @@ public class Partido implements Comparable<Partido> {
     public int getNmrCandidatosEleitos() {
         int eleitos = 0;
         for (Candidato c : candidatos) {
-            if (c.ehEleito())
-                eleitos++;
+            if (c.ehEleito()) eleitos++;
         }
+
         return eleitos;
+    }
+
+    public LinkedList<Candidato> getCandidatos(){
+        return new LinkedList<Candidato>(candidatos);
     }
 
     @Override
     public int compareTo(Partido o) {
         int result = (o.getQtdVotosNominais() + o.getnumVotos()) - (this.getQtdVotosNominais() + this.getnumVotos());
 
-        if (result != 0) {
-            return result;
-        } else {
-            return this.getNumPartido() - o.getNumPartido();
-        }
+        if (result != 0) return result;
+        else return this.getNumPartido() - o.getNumPartido();
     }
 
+    // ordena os candidatos dentro de um mesmo partido
+    public void ordenaCandidatos(){
+        candidatos.sort(null);
+    }
 }

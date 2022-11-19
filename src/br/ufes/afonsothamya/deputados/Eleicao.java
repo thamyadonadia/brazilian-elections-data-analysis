@@ -79,5 +79,4 @@ public class Eleicao {
     public Candidato getCandidatoKey(int nr_votavel) {
         return this.candidatos.get(nr_votavel);
     }
-
 }
