@@ -7,6 +7,7 @@ import java.util.Locale;
 import br.ufes.afonsothamya.deputados.Eleicao;
 import br.ufes.afonsothamya.deputados.registrados.*;
 
+// TODO: tirar o imprime na frente das funções
 public class Impressora {
     public void imprimeNumeroVagas(Eleicao deputados) {
         System.out.println("Número de vagas: " + deputados.getVagas() + "\n");
@@ -141,10 +142,35 @@ public class Impressora {
 
     public void imprimeDistribuicaoEleitosPorSexo(double totalMulheresEleitas, double porcentagemMulheres, double totalHomensEleitos, double porcentagemHomens){
         NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
-        
+        nf.setMinimumFractionDigits(2); nf.setMaximumFractionDigits(2);
         //TODO: não consegui colocar em duas casas decimais 
         System.out.println("\nEleitos, por gênero:");
-        System.out.println("Feminino: " + totalMulheresEleitas + " (" + nf.format(porcentagemMulheres) + ")");
-        System.out.println("Masculino: " + totalHomensEleitos + " (" + nf.format(porcentagemHomens) + ")");
+        System.out.println("Feminino: " + (int)totalMulheresEleitas + " (" + nf.format(porcentagemMulheres) + ")");
+        System.out.println("Masculino: " + (int)totalHomensEleitos + " (" + nf.format(porcentagemHomens) + ")");
     }
+
+    public void imprimeDistribuicaoEleitosPorIdade(double divisaoIdade[], double porcentagemIdade[]){
+        NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
+        nf.setMinimumFractionDigits(2); nf.setMaximumFractionDigits(2);
+
+        System.out.println("\nEleitos, por faixa etária (na data da eleição):");
+    
+        System.out.println("      Idade < 30: " + (int)divisaoIdade[0] + " (" + nf.format(porcentagemIdade[0]) + "%)");
+        System.out.println("30 <= Idade < 40: " + (int)divisaoIdade[1] + " (" + nf.format(porcentagemIdade[1]) + "%)");
+        System.out.println("40 <= Idade < 50: " + (int)divisaoIdade[2] + " (" + nf.format(porcentagemIdade[2]) + "%)");
+        System.out.println("50 <= Idade < 60: " + (int)divisaoIdade[3] + " (" + nf.format(porcentagemIdade[3]) + "%)");
+        System.out.println("60 <= Idade     : " + (int)divisaoIdade[4] + " (" + nf.format(porcentagemIdade[4]) + "%)");
+    }
+
+    public void distribuicaoVotos(int totalVotosValidos, int totalVotosNominais, int totalVotosLegenda, double porcentagemVotosNominais, double porcentagemVotosLegenda){
+        NumberFormat nfPorcentagem = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
+        nfPorcentagem.setMinimumFractionDigits(2);nfPorcentagem.setMaximumFractionDigits(2);
+
+        NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
+
+        System.out.println("\nTotal de votos válidos:    " + nf.format(totalVotosValidos));
+        System.out.println("Total de votos nominais:   " + nf.format(totalVotosNominais) + " (" + nfPorcentagem.format(porcentagemVotosNominais) + "%)" );
+        System.out.println("Total de votos de legenda: " +  nf.format(totalVotosLegenda) + " (" + nfPorcentagem.format(porcentagemVotosLegenda) + "%)" );
+    }
+   
 }

@@ -14,7 +14,7 @@ public class Candidato implements Comparable<Candidato> {
     private int situaçãoEleitoral;
     private int genero;
     private int numFederação;
-    private int numVotos;
+    private int numVotos; // votos nominais
 
     public Candidato(String nomeUrna, String nomeCompleto, int cargo, int númeroUrna, int numPartido,
             String siglaPartido, LocalDate nascimento, int situaçãoEleitoral, int genero, int numFederação) {

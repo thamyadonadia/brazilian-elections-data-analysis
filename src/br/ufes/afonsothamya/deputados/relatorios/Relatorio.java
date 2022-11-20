@@ -1,6 +1,8 @@
 package br.ufes.afonsothamya.deputados.relatorios;
 
+import java.time.Period;
 import java.util.LinkedList;
+import java.util.function.DoubleToIntFunction;
 
 import br.ufes.afonsothamya.deputados.Eleicao;
 import br.ufes.afonsothamya.deputados.io.Impressora;
@@ -69,6 +71,37 @@ public class Relatorio {
         }
     }
 
+    public void eleitosPorIdade(){
+        // o nome tá bom?
+        double divisaoIdade[] = new double[5]; 
+        double porcentagemIdade[] = new double[5];
+        double totalCandidatosEleitos = 0;
+        Period periodo; int idade;
+
+        for(Candidato c: deputados.getCandidatos()){
+            if(c.ehEleito()){
+                totalCandidatosEleitos++;
+                
+                periodo = Period.between(c.getNascimento(), deputados.getDia());
+                idade = periodo.getYears();
+
+                if(idade < 30) divisaoIdade[0]++;
+                else if(idade < 40) divisaoIdade[1]++;
+                else if(idade < 50) divisaoIdade[2]++;
+                else if(idade < 60) divisaoIdade[3]++;
+                else divisaoIdade[4]++;
+            }
+        }
+        
+        porcentagemIdade[0] = (divisaoIdade[0] / totalCandidatosEleitos) * 100;
+        porcentagemIdade[1] = (divisaoIdade[1] / totalCandidatosEleitos) * 100;
+        porcentagemIdade[2] = (divisaoIdade[2] / totalCandidatosEleitos) * 100;
+        porcentagemIdade[3] = (divisaoIdade[3] / totalCandidatosEleitos) * 100;
+        porcentagemIdade[4] = (divisaoIdade[4] / totalCandidatosEleitos) * 100;
+
+        imprime.imprimeDistribuicaoEleitosPorIdade(divisaoIdade, porcentagemIdade);
+    }
+
     // tomando como base essa função: vale mais a pena deixar apenas a impressão
     // na impressora e fazer o tratamento e as análises aqui mesmo
     public void eleitosPorSexo(){
@@ -90,4 +123,23 @@ public class Relatorio {
        
         imprime.imprimeDistribuicaoEleitosPorSexo(totalMulheresEleitas, porcentagemMulheres, totalHomensEleitos, porcentagemHomens);
     }
+
+    public void distribuicaoVotos(){
+        int totalVotosValidos = 0, totalVotosNominais = 0, totalVotosLegenda = 0;
+        double porcentagemVotosNominais, porcentagemVotosLegenda;
+
+        for(Partido p: deputados.getPartidos()){
+            totalVotosLegenda += p.getnumVotos();
+        }
+
+        for(Candidato c: deputados.getCandidatos()){
+            totalVotosNominais += c.getNumVotos();
+        }
+
+        totalVotosValidos = totalVotosLegenda + totalVotosNominais;
+        porcentagemVotosLegenda = ((double)totalVotosLegenda / (double)totalVotosValidos) * 100;
+        porcentagemVotosNominais = ((double)totalVotosNominais / (double)totalVotosValidos) * 100;
+        imprime.distribuicaoVotos(totalVotosValidos, totalVotosNominais, totalVotosLegenda, porcentagemVotosNominais, porcentagemVotosLegenda);
+    }
 }
+    

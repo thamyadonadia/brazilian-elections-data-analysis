@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Partido implements Comparable<Partido> {
     private int cargo;
-    private int numVotos;
+    private int numVotos; // votos de legenda
     private String siglaPartido;
     private int numPartido;
     private LinkedList<Candidato> candidatos;

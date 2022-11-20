@@ -34,7 +34,9 @@ public class App {
         sintetizador.deputadosMaisVotados();
         sintetizador.partidosEleitos();
         sintetizador.primeiroUltimoPartidos();
+        sintetizador.eleitosPorIdade();
         sintetizador.eleitosPorSexo();
+        sintetizador.distribuicaoVotos();
 
     }
 }

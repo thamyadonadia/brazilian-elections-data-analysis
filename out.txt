@@ -134,6 +134,17 @@ Primeiro e último colocados de cada partido:
 24 - PROS - 90, MAYCON JOGADOR (90, 1.723) / PROFESSORA VIVI (90, 111)
 25 - PRTB - 28, DANTAS EBENEZER (28, 920) / GLAUCIA TRANCOSO (28, 34)
 
+Eleitos, por faixa etária (na data da eleição):
+      Idade < 30: 1 (3,33%)
+30 <= Idade < 40: 6 (20,00%)
+40 <= Idade < 50: 8 (26,67%)
+50 <= Idade < 60: 6 (20,00%)
+60 <= Idade     : 9 (30,00%)
+
 Eleitos, por gênero:
-Feminino: 4.0 (13,333)
-Masculino: 26.0 (86,667)
+Feminino: 4 (13,33)
+Masculino: 26 (86,67)
+
+Total de votos válidos:    2.077.274
+Total de votos nominais:   1.966.505 (94,67%)
+Total de votos de legenda: 110.769 (5,33%)
