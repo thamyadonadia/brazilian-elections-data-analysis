@@ -1,22 +1,23 @@
 ## Organização do Trabalho 01 
 
 ### Arquivos
-- [ ] App.java - contém a main e organiza os parâmetros     
-- [ ] Candidato.java - informações de cada candidato OK     
-- [ ] Partido.java - informações de cada partido OK     
-- [ ] Leitor.java - a ver sobre       
-- [ ] Eleição.java - informações da eleição no estado -  lista encadeada      
+- [X] App.java - contém a main e organiza os parâmetros     
+- [X] Candidato.java - informações de cada candidato OK     
+- [X] Partido.java - informações de cada partido OK     
+- [X] Leitor.java - a ver sobre       
+- [X] Eleição.java - informações da eleição no estado -  lista encadeada      
 - [ ] Relatório.java - gerador de relatórios      
     
 ### Tarefas 
 - [X] Estudar leitura de arquivos      
-- [ ] Estudar sobre o .jar - tentar ver material do JP
+- [X] Estudar sobre o .jar - tentar ver material do JP
 - [ ] Mudar nome das variáveis 
 
 ### Etapas 
-- [ ] Arquitetura do projeto     
-- [ ] Implementação do projeto    
+- [X] Arquitetura do projeto     
+- [X] Implementação do projeto    
 - [ ] Tratamento de exceções    
+- [ ] Refatoramento do código
 - [ ] Comentar código    
 - [ ] Escrever relatório
 - [ ] Montar makefile 
