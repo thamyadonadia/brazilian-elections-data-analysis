@@ -15,19 +15,22 @@ public class Candidato implements Comparable<Candidato> {
     private int genero;
     private int numFederação;
     private int numVotos; // votos nominais
+    private int destinoVotos;
 
-    public Candidato(String nomeUrna, String nomeCompleto, int cargo, int númeroUrna, int numPartido,
-            String siglaPartido, LocalDate nascimento, int situaçãoEleitoral, int genero, int numFederação) {
+    public Candidato(String nomeUrna, String nomeCompleto, int cargo, int númeroUrna,Partido relaçãoPartidária, int numPartido,
+            String siglaPartido, LocalDate nascimento, int situaçãoEleitoral, int genero, int numFederação, int destinoVotos) {
         this.nomeUrna = nomeUrna;
         this.nomeCompleto = nomeCompleto;
         this.cargo = cargo;
         this.númeroUrna = númeroUrna;
+        this.relaçãoPartidária = relaçãoPartidária;
         this.numPartido = numPartido;
         this.siglaPartido = siglaPartido;
         this.nascimento = nascimento;
         this.situaçãoEleitoral = situaçãoEleitoral;
         this.genero = genero;
         this.numFederação = numFederação;
+        this.destinoVotos = destinoVotos;
         this.numVotos = 0;
     }
 
@@ -93,6 +96,10 @@ public class Candidato implements Comparable<Candidato> {
 
     public int comparaNumVotos(Candidato comparado) {
         return this.numVotos - comparado.numVotos;
+    }
+
+    public int getDestinoVotos() {
+        return destinoVotos;
     }
 
     public boolean ehEleito() {

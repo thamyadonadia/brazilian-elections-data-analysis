@@ -2,7 +2,6 @@ package br.ufes.afonsothamya.deputados.relatorios;
 
 import java.time.Period;
 import java.util.LinkedList;
-import java.util.function.DoubleToIntFunction;
 
 import br.ufes.afonsothamya.deputados.Eleicao;
 import br.ufes.afonsothamya.deputados.io.Impressora;

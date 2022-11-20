@@ -50,14 +50,14 @@ public class Impressora {
 
                 System.out.println(c.getNomeUrna() + " (" + c.getSiglaPartido() + ", " + nf.format(c.getNumVotos()) + " votos)");
                 
-                contador++;
             }
 
-            if ((contador <= numeroVagas) && !c.ehEleito()) {
+            if ((contador <= numeroVagas) &&  !(c.ehEleito())) {
                 prejudicados.add(c);
             } else if ((contador > numeroVagas) && c.ehEleito()) {
                 beneficiados.add(c);
             }
+            contador++;
         }
 
         // impressão do relatório 4
@@ -128,12 +128,12 @@ public class Impressora {
         for(Candidato c: candidatosMaisVotados){
 
             System.out.print(contador + " - " + c.getSiglaPartido() + " - " + c.getNumPartido());
-            System.out.print(", " + c.getNomeUrna() + " (" + c.getNumPartido() + ", " + nf.format(c.getNumVotos()) + ") / ");
+            System.out.print(", " + c.getNomeUrna() + " (" + c.getNúmeroUrna() + ", " + nf.format(c.getNumVotos()) + " votos) / ");
             
             Partido p = c.getRelaçãoPartidária();
             Candidato ultimo = p.getCandidatos().getLast(); 
            
-            System.out.print(ultimo.getNomeUrna() + " (" + ultimo.getNumPartido() + ", " + nf.format(ultimo.getNumVotos()) + ")\n");
+            System.out.print(ultimo.getNomeUrna() + " (" + ultimo.getNúmeroUrna() + ", " + nf.format(ultimo.getNumVotos()) + " votos)\n");
         
             contador++;
         }
@@ -145,8 +145,8 @@ public class Impressora {
         nf.setMinimumFractionDigits(2); nf.setMaximumFractionDigits(2);
         //TODO: não consegui colocar em duas casas decimais 
         System.out.println("\nEleitos, por gênero:");
-        System.out.println("Feminino: " + (int)totalMulheresEleitas + " (" + nf.format(porcentagemMulheres) + ")");
-        System.out.println("Masculino: " + (int)totalHomensEleitos + " (" + nf.format(porcentagemHomens) + ")");
+        System.out.println("Feminino:  " + (int)totalMulheresEleitas + " (" + nf.format(porcentagemMulheres) + "%)");
+        System.out.println("Masculino: " + (int)totalHomensEleitos + " (" + nf.format(porcentagemHomens) + "%)");
     }
 
     public void imprimeDistribuicaoEleitosPorIdade(double divisaoIdade[], double porcentagemIdade[]){
@@ -170,7 +170,7 @@ public class Impressora {
 
         System.out.println("\nTotal de votos válidos:    " + nf.format(totalVotosValidos));
         System.out.println("Total de votos nominais:   " + nf.format(totalVotosNominais) + " (" + nfPorcentagem.format(porcentagemVotosNominais) + "%)" );
-        System.out.println("Total de votos de legenda: " +  nf.format(totalVotosLegenda) + " (" + nfPorcentagem.format(porcentagemVotosLegenda) + "%)" );
+        System.out.print("Total de votos de legenda: " +  nf.format(totalVotosLegenda) + " (" + nfPorcentagem.format(porcentagemVotosLegenda) + "%)" );
     }
    
 }

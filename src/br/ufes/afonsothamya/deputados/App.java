@@ -30,6 +30,7 @@ public class App {
         reader.leituraVotos(processo);
 
         Relatorio sintetizador = new Relatorio(processo);
+        sintetizador.numeroVagas();
         sintetizador.deputadosEleitos();
         sintetizador.deputadosMaisVotados();
         sintetizador.partidosEleitos();
