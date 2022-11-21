@@ -66,15 +66,18 @@ public class Leitor {
                 }
 
                 if (cargo == adaptaStringInt(colunas[13])
-                        && (2 == adaptaStringInt(colunas[68]) || 16 == adaptaStringInt(colunas[68])|| 1==adaptaDestinoInt(colunas[67]))) {
+                        && (2 == adaptaStringInt(colunas[68]) || 16 == adaptaStringInt(colunas[68])
+                                || 1 == adaptaDestinoInt(colunas[67]))) {
                     pessoa = new Candidato(colunas[18].replace("\"", ""), colunas[17].replace("\"", ""), cargo,
-                            adaptaStringInt(colunas[16]),  grupo,
+                            adaptaStringInt(colunas[16]), grupo,
                             adaptaStringInt(colunas[27]), colunas[28].replace("\"", ""),
                             LocalDate.parse(colunas[42].replace("\"", ""), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
                             adaptaStringInt(colunas[56]), adaptaStringInt(colunas[45]),
-                            adaptaStringInt(colunas[30]),adaptaDestinoInt(colunas[67]));
+                            adaptaStringInt(colunas[30]), adaptaDestinoInt(colunas[67]));
 
-                    grupo.adicionaCandidatos(pessoa); // adiciona o candidato no partido dele
+                    if (adaptaDestinoInt(colunas[67]) != 1) {
+                        grupo.adicionaCandidatos(pessoa); // adiciona o candidato no partido dele
+                    }
                     deputados.adicionaCandidatos(pessoa); // adiciona o candidato na lista de candidatos da eleição
                     pessoa.setRelaçãoPartidária(grupo);
                 }
@@ -121,10 +124,9 @@ public class Leitor {
                         }
 
                     } else {
-                        if(pessoa.getDestinoVotos()==1){
+                        if (pessoa.getDestinoVotos() == 1) {
                             pessoa.getRelaçãoPartidária().addNumVotos(adaptaStringInt(colunas[21]));
-                        }
-                        else{
+                        } else {
                             pessoa.addNumVotos(adaptaStringInt(colunas[21]));
                         }
                     }
@@ -146,11 +148,11 @@ public class Leitor {
         return result;
     }
 
-    public static Integer adaptaDestinoInt(String codigo){
+    public static Integer adaptaDestinoInt(String codigo) {
         String codigoResult;
 
         codigoResult = codigo.replace("\"", "");
-        if(codigoResult.equals("Válido (legenda)")){
+        if (codigoResult.equals("Válido (legenda)")) {
             return 1;
         }
 
