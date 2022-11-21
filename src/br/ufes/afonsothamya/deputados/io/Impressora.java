@@ -133,7 +133,9 @@ public class Impressora {
             Partido p = c.getRelaçãoPartidária();
             Candidato ultimo = p.getCandidatos().getLast(); 
            
-            System.out.print(ultimo.getNomeUrna() + " (" + ultimo.getNúmeroUrna() + ", " + nf.format(ultimo.getNumVotos()) + " votos)\n");
+            System.out.print(ultimo.getNomeUrna() + " (" + ultimo.getNúmeroUrna() + ", " + nf.format(ultimo.getNumVotos()));
+            if(ultimo.getNumVotos()>1) System.out.print(" votos)\n");
+            else System.out.print(" voto)\n");
         
             contador++;
         }

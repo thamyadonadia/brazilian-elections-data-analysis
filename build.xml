@@ -4,7 +4,7 @@
 	<!-- Propriedades do build. -->
 	<property name="src" location="src" />
 	<property name="bin" location="bin" />
-	<property name="mainClass" value="Main" />
+	<property name="mainClass" value="br.ufes.afonsothamya.deputados.App" />
 
 	<!-- Inicialização. -->
 	<target name="init" description="Inicializa as estruturas necessárias.">
