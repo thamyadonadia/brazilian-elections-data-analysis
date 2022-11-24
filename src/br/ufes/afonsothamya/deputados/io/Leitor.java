@@ -4,7 +4,7 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import br.ufes.afonsothamya.deputados.Eleicao;
+import br.ufes.afonsothamya.deputados.eleicao.Eleicao;
 import br.ufes.afonsothamya.deputados.registrados.*;
 
 public class Leitor {

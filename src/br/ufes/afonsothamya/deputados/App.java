@@ -3,14 +3,14 @@ package br.ufes.afonsothamya.deputados;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import br.ufes.afonsothamya.deputados.eleicao.Eleicao;
 import br.ufes.afonsothamya.deputados.io.Leitor;
 import br.ufes.afonsothamya.deputados.relatorios.Relatorio;
 
 public class App {
     public static void main(String[] args) throws Exception {
         if (args.length != 4) {
-            System.out.println(
-                    "uso: java -jar deputados.jar --<modalidade> <arquivo_candidatos> <arquivo_votação> <dia da votacao>");
+            System.out.println("uso: java -jar deputados.jar --<modalidade> <arquivo_candidatos> <arquivo_votação> <dia da votacao>");
             System.exit(1);
         }
 

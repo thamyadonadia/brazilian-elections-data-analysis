@@ -3,7 +3,7 @@ package br.ufes.afonsothamya.deputados.relatorios;
 import java.time.Period;
 import java.util.LinkedList;
 
-import br.ufes.afonsothamya.deputados.Eleicao;
+import br.ufes.afonsothamya.deputados.eleicao.Eleicao;
 import br.ufes.afonsothamya.deputados.io.Impressora;
 import br.ufes.afonsothamya.deputados.registrados.*;
 
@@ -22,64 +22,73 @@ public class Relatorio {
         imprime = new Impressora();
     }
 
-
-    // PROBLEMAO: precisamos passar uma cópia da lista e não a lista oficial 
-
-
-
-    // retornar uma string que vai ser passada para a impressora ou chamar a
-    // impressora aqui
-    // talvez seja melhor a segunda opção porque caso tenha algum erro, só muda a
-    // impressora
     // relatório 1
     public void numeroVagas() {
-        imprime.imprimeNumeroVagas(deputados);
+        imprime.numeroVagas(deputados.getVagas());
     }
 
     // relatório 2
     public void deputadosEleitos() {
-        // os candidatos precisam ser dispostos em ordem decressente de votos, talvez
-        // seja
-        // bom ordenar aqui mesmo
-        imprime.imprimeCandidatosEleitos(deputados, candidatosOrdenadosVoto);
+        imprime.candidatosEleitos(deputados, candidatosOrdenadosVoto);
     }
 
     // relatórios 3, 4 e 5
     public void deputadosMaisVotados() {
-        // os candidatos precisam ser dispostos em ordem decressente de votos, talvez
-        // seja
-        // bom ordenar aqui mesmo
-        imprime.imprimeCandidatosMaisVotados(deputados, candidatosOrdenadosVoto);
+        LinkedList<Candidato> prejudicados = new LinkedList<>();
+        LinkedList<Candidato> beneficiados = new LinkedList<>();
+        LinkedList<Candidato> candidatosOrdenadosVotosTotal = new LinkedList<>();
+        int numeroVagas = deputados.getVagas(); int contador = 1; 
+
+
+        for (Candidato c : candidatosOrdenadosVoto) {
+            if (contador <= numeroVagas) {
+                candidatosOrdenadosVotosTotal.add(c);
+            }
+
+            if ((contador <= numeroVagas) &&  !(c.ehEleito())) {
+                prejudicados.add(c);
+            } else if ((contador > numeroVagas) && c.ehEleito()) {
+                beneficiados.add(c);
+            }
+            contador++;
+        }
+        
+        imprime.candidatosMaisVotados(candidatosOrdenadosVotosTotal, prejudicados, beneficiados, candidatosOrdenadosVoto);
     }
 
     // relatório 6
     public void partidosEleitos() {
-        imprime.imprimePartidoVotos(deputados, partidosOrdenadosEleito);
+        imprime.partidoVotos(deputados, partidosOrdenadosEleito);
     }
 
     // relatório 8
     public void primeiroUltimoPartidos() {
-        this.ordenaCandidatosPartidos();
-        imprime.imprimePrimeiroUltimoPartidos(deputados, partidosOrdenadosEleito);
-    }
-
-    // colocar como static?
-    public void ordenaCandidatosPartidos(){
         for(Partido p: partidosOrdenadosEleito){
             p.ordenaCandidatos();
         }
+
+        LinkedList<Candidato> candidatosMaisVotados = new LinkedList<>();
+
+        for(Partido p: partidosOrdenadosEleito){
+            if(p.getCandidatos().size()>0){
+                candidatosMaisVotados.add(p.getCandidatos().getFirst());
+            }   
+        }
+
+        candidatosMaisVotados.sort(null);
+
+        imprime.primeiroUltimoPartidos(candidatosMaisVotados);
     }
 
+    // relatório 9
     public void eleitosPorIdade(){
-        // o nome tá bom?
         double divisaoIdade[] = new double[5]; 
         double porcentagemIdade[] = new double[5];
-        double totalCandidatosEleitos = 0;
+        double totalCandidatosEleitos = deputados.getNumeroCandidatosEleitos();
         Period periodo; int idade;
 
         for(Candidato c: deputados.getCandidatos()){
             if(c.ehEleito()){
-                totalCandidatosEleitos++;
                 
                 periodo = Period.between(c.getNascimento(), deputados.getDia());
                 idade = periodo.getYears();
@@ -98,20 +107,17 @@ public class Relatorio {
         porcentagemIdade[3] = (divisaoIdade[3] / totalCandidatosEleitos) * 100;
         porcentagemIdade[4] = (divisaoIdade[4] / totalCandidatosEleitos) * 100;
 
-        imprime.imprimeDistribuicaoEleitosPorIdade(divisaoIdade, porcentagemIdade);
+        imprime.distribuicaoEleitosPorIdade(divisaoIdade, porcentagemIdade);
     }
 
-    // tomando como base essa função: vale mais a pena deixar apenas a impressão
-    // na impressora e fazer o tratamento e as análises aqui mesmo
+    // relatório 10
     public void eleitosPorSexo(){
-        // colocar uma função na eleição.java para retornar o número de partidos e de candidatos?
-        double totalCandidatosEleitos = 0;
+        double totalCandidatosEleitos = deputados.getNumeroCandidatosEleitos();
         double totalMulheresEleitas = 0; 
         double totalHomensEleitos = 0;
         
         for(Candidato c : deputados.getCandidatos()){
             if(c.ehEleito()){
-                totalCandidatosEleitos++;
                 if(c.getGenero() == 2) totalHomensEleitos++;
                 else if(c.getGenero() == 4) totalMulheresEleitas++;  
             }
@@ -120,9 +126,10 @@ public class Relatorio {
         double porcentagemHomens = (totalHomensEleitos / totalCandidatosEleitos) * 100;
         double porcentagemMulheres = (totalMulheresEleitas / totalCandidatosEleitos) * 100;
        
-        imprime.imprimeDistribuicaoEleitosPorSexo(totalMulheresEleitas, porcentagemMulheres, totalHomensEleitos, porcentagemHomens);
+        imprime.distribuicaoEleitosPorSexo(totalMulheresEleitas, porcentagemMulheres, totalHomensEleitos, porcentagemHomens);
     }
 
+    // relatório 11
     public void distribuicaoVotos(){
         int totalVotosValidos = 0, totalVotosNominais = 0, totalVotosLegenda = 0;
         double porcentagemVotosNominais, porcentagemVotosLegenda;

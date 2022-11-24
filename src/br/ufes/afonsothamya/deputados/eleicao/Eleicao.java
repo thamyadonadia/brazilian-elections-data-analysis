@@ -1,4 +1,4 @@
-package br.ufes.afonsothamya.deputados;
+package br.ufes.afonsothamya.deputados.eleicao;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import br.ufes.afonsothamya.deputados.registrados.*;
 
 public class Eleicao {
-    // modificado para Hashmap
     private HashMap<Integer, Candidato> candidatos;
     private LocalDate dia;
     private LinkedList<Partido> partidos;
@@ -26,10 +25,9 @@ public class Eleicao {
         return new LinkedList<Candidato>(candidatos.values());
     }
 
-    // TODO: talvez trocar o nome do parâmetro?
-    public void adicionaCandidatos(Candidato c) {
-        candidatos.put(c.getNúmeroUrna(), c);
-        if ((c.getSituaçãoEleitoral() == 2) || (c.getSituaçãoEleitoral() == 3)) {
+    public void adicionaCandidatos(Candidato pessoa) {
+        candidatos.put(pessoa.getNúmeroUrna(), pessoa);
+        if ((pessoa.getSituaçãoEleitoral() == 2) || (pessoa.getSituaçãoEleitoral() == 3)) {
             this.vagas++;
         }
     }
@@ -43,9 +41,8 @@ public class Eleicao {
 
     }
 
-    // TODO: talvez trocar o nome do parâmetro?
-    public void adicionaPartidos(Partido p) {
-        partidos.add(p);
+    public void adicionaPartidos(Partido grupo) {
+        partidos.add(grupo);
     }
 
     public String getTipoConsulta() {
@@ -55,8 +52,6 @@ public class Eleicao {
     public int getVagas() {
         return vagas;
     }
-
-    // criado pra conseguir gerar os partidos
     public Partido temEssePartido(String nm_Partido) {
         for (Partido p : partidos) {
             if (p.getSiglaPartido().equals(nm_Partido)) {
@@ -67,6 +62,7 @@ public class Eleicao {
         return null;
     }
 
+    // rever nome 
     public Partido temEssePartido(int nr_Partido) {
         for (Partido p : partidos) {
             if (p.getNumPartido() == nr_Partido) {
@@ -79,4 +75,17 @@ public class Eleicao {
     public Candidato getCandidatoKey(int nr_votavel) {
         return this.candidatos.get(nr_votavel);
     }
+
+    public int getNumeroCandidatosEleitos(){
+        int numCandidatosEleitos = 0;
+        
+        for(Candidato c: this.getCandidatos()){
+            if(c.ehEleito()){
+                numCandidatosEleitos++;
+            }
+        }
+
+        return numCandidatosEleitos;
+    }
+
 }
