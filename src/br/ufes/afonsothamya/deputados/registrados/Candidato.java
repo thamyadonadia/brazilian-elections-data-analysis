@@ -102,10 +102,13 @@ public class Candidato implements Comparable<Candidato> {
         return destinoVotos;
     }
 
+    //verifica se o candidato possui o status de eleito
     public boolean ehEleito() {
         return (this.getSituaçãoEleitoral() == 2) || (this.getSituaçãoEleitoral() == 3);
     }
 
+    //compara o número de votos, se igual, compara idade
+    //ordenando em ordem crescente de votos e mais velho
     @Override
     public int compareTo(Candidato o) {
         int result = o.numVotos - this.numVotos;

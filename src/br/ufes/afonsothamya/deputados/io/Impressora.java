@@ -1,27 +1,35 @@
 package br.ufes.afonsothamya.deputados.io;
 
 import java.text.NumberFormat;
-import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 
 import br.ufes.afonsothamya.deputados.eleicao.Eleicao;
 import br.ufes.afonsothamya.deputados.registrados.*;
 
 public class Impressora {
+
+    // relatório 1
+    // imprime o número de vagas da eleição
     public void numeroVagas(int numVagas) {
         System.out.println("Número de vagas: " + numVagas + "\n");
     }
 
-    public void candidatosEleitos(Eleicao deputados, LinkedList<Candidato> candidatosOrdenados) {
+    // relatório 2
+    // imprime os candidatos eleitos
+    public void candidatosEleitos(Eleicao deputados, List<Candidato> candidatosOrdenados) {
         NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
         int contador = 1;
 
+        //verificação de modalidade para print específico
         if (deputados.getTipoConsulta().equals("--federal")) System.out.println("Deputados federais eleitos:");
         else System.out.println("Deputados estaduais eleitos:");
 
+        //percorre lista de candidatos ordenados por voto
         for (Candidato c : candidatosOrdenados) {
 
-            if ((c.getSituaçãoEleitoral() == 2) || (c.getSituaçãoEleitoral() == 3)) {
+            //se eleito, imprime suas informações
+            if (c.ehEleito()) {
                 System.out.print(contador + " - ");
 
                 if (c.getNumFederação() != -1) System.out.print("*");
@@ -33,13 +41,16 @@ public class Impressora {
         System.out.printf("\n");
     }
 
-    public void candidatosMaisVotados(LinkedList<Candidato> candidatosOrdenadosVotos, LinkedList<Candidato> prejudicados, LinkedList<Candidato> beneficiados, LinkedList<Candidato> candidatosOrdenadosVotosTotal) {
+    // relatório 3, 4 e 5
+    // imprime candidatos mais votados e diferenças
+    // entre esta lista e a lista de eleitos
+    public void candidatosMaisVotados(List<Candidato> candidatosOrdenadosVotos, List<Candidato> prejudicados, List<Candidato> beneficiados, List<Candidato> candidatosOrdenadosVotosTotal) {
         NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
         int contador = 1; 
 
         System.out.println("Candidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):");
 
-        // impressão do relatório 3
+        // impressão do relatório 3 (mais votados)
         for (Candidato c : candidatosOrdenadosVotos) {
     
             System.out.print(contador + " - ");
@@ -51,7 +62,7 @@ public class Impressora {
             contador++;
         }
 
-        // impressão do relatório 4
+        // impressão do relatório 4 (mais votados mas não eleitos)
         System.out.println("\nTeriam sido eleitos se a votação fosse majoritária, e não foram eleitos:\n(com sua posição no ranking de mais votados)");
         for (Candidato c : prejudicados) {
             System.out.print((candidatosOrdenadosVotosTotal.indexOf(c) + 1) + " - ");
@@ -61,7 +72,7 @@ public class Impressora {
             System.out.println(c.getNomeUrna() + " (" + c.getSiglaPartido() + ", " + nf.format(c.getNumVotos()) + " votos)");
         }
 
-        // impressão do relatório 5
+        // impressão do relatório 5 (eleitos mas não entre os mais votados)
         System.out.println("\nEleitos, que se beneficiaram do sistema proporcional:\n(com sua posição no ranking de mais votados)");
         for (Candidato c : beneficiados) {
             System.out.print((candidatosOrdenadosVotosTotal.indexOf(c) + 1) + " - ");
@@ -73,10 +84,12 @@ public class Impressora {
     }
 
     // impressão do relatório 6
-    public void partidoVotos(Eleicao deputados, LinkedList<Partido> partidosOrdenados) {
+    // informação geral dos partidos (votos e candidatos eleitos)
+    public void partidoVotos(Eleicao deputados, List<Partido> partidosOrdenados) {
         NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
         int contador = 1; int totalVotos = 0; int eleitos = 0;
 
+        // percorre a lista de partidos ordenados por votos totais imprimindo suas informações
         System.out.println("\nVotação dos partidos e número de candidatos eleitos: ");
         for (Partido p : partidosOrdenados) {
             System.out.print(contador + " - " + p.getSiglaPartido() + " - " + p.getNumPartido() + ", ");
@@ -102,7 +115,8 @@ public class Impressora {
     }
 
     // relatório 8
-    public void primeiroUltimoPartidos(LinkedList<Candidato> candidatosMaisVotados) {
+    // primeiro e último colocado de cada partido por ordem de votos
+    public void primeiroUltimoPartidos(List<Candidato> candidatosMaisVotados) {
         NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
         int contador = 1;
 
@@ -110,12 +124,16 @@ public class Impressora {
 
         for(Candidato c: candidatosMaisVotados){
 
+            // imprime primeiro a info do partido e do candidato mais votado
             System.out.print(contador + " - " + c.getSiglaPartido() + " - " + c.getNumPartido());
             System.out.print(", " + c.getNomeUrna() + " (" + c.getNúmeroUrna() + ", " + nf.format(c.getNumVotos()) + " votos) / ");
             
+            // apartir desse candidato, é coletado o menos votado
+            // do seu partido por meio de referências
             Partido p = c.getRelaçãoPartidária();
             Candidato ultimo = p.getCandidatos().getLast(); 
            
+            //imprime info do ultimo colocado
             System.out.print(ultimo.getNomeUrna() + " (" + ultimo.getNúmeroUrna() + ", " + nf.format(ultimo.getNumVotos()));
             if(ultimo.getNumVotos()>1) System.out.print(" votos)\n");
             else System.out.print(" voto)\n");
@@ -125,6 +143,7 @@ public class Impressora {
     }
 
     // relatório 9
+    // distribuição de eleitos por idade
     public void distribuicaoEleitosPorIdade(double divisaoIdade[], double porcentagemIdade[]){
         NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
         nf.setMinimumFractionDigits(2); nf.setMaximumFractionDigits(2);
@@ -139,6 +158,7 @@ public class Impressora {
     }
 
     // relatório 10
+    // distribuição de eleitos por sexo
     public void distribuicaoEleitosPorSexo(double totalMulheresEleitas, double porcentagemMulheres, double totalHomensEleitos, double porcentagemHomens){
         NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
         nf.setMinimumFractionDigits(2); nf.setMaximumFractionDigits(2);
@@ -149,6 +169,7 @@ public class Impressora {
     }
 
     // relatório 11
+    // total de votos, votos nominais e votos de legenda
     public void distribuicaoVotos(int totalVotosValidos, int totalVotosNominais, int totalVotosLegenda, double porcentagemVotosNominais, double porcentagemVotosLegenda){
         NumberFormat nfPorcentagem = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
         nfPorcentagem.setMinimumFractionDigits(2);nfPorcentagem.setMaximumFractionDigits(2);

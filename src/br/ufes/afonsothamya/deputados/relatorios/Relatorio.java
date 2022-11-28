@@ -2,6 +2,7 @@ package br.ufes.afonsothamya.deputados.relatorios;
 
 import java.time.Period;
 import java.util.LinkedList;
+import java.util.List;
 
 import br.ufes.afonsothamya.deputados.eleicao.Eleicao;
 import br.ufes.afonsothamya.deputados.io.Impressora;
@@ -10,8 +11,8 @@ import br.ufes.afonsothamya.deputados.registrados.*;
 public class Relatorio {
     private Eleicao deputados;
     private Impressora imprime;
-    private LinkedList<Candidato> candidatosOrdenadosVoto;
-    private LinkedList<Partido> partidosOrdenadosEleito;
+    private List<Candidato> candidatosOrdenadosVoto;
+    private List<Partido> partidosOrdenadosEleito;
 
     public Relatorio(Eleicao deputados) {
         this.deputados = deputados;
@@ -34,20 +35,24 @@ public class Relatorio {
 
     // relatórios 3, 4 e 5
     public void deputadosMaisVotados() {
-        LinkedList<Candidato> prejudicados = new LinkedList<>();
-        LinkedList<Candidato> beneficiados = new LinkedList<>();
-        LinkedList<Candidato> candidatosOrdenadosVotosTotal = new LinkedList<>();
+        List<Candidato> prejudicados = new LinkedList<>();
+        List<Candidato> beneficiados = new LinkedList<>();
+        List<Candidato> candidatosOrdenadosVotosTotal = new LinkedList<>();
         int numeroVagas = deputados.getVagas(); int contador = 1; 
 
 
         for (Candidato c : candidatosOrdenadosVoto) {
+            // mais votados
             if (contador <= numeroVagas) {
                 candidatosOrdenadosVotosTotal.add(c);
             }
 
+            // mais votados mas não eleitos
             if ((contador <= numeroVagas) &&  !(c.ehEleito())) {
                 prejudicados.add(c);
-            } else if ((contador > numeroVagas) && c.ehEleito()) {
+            } 
+            //eleitos mas não entre os mais votados
+            else if ((contador > numeroVagas) && c.ehEleito()) {
                 beneficiados.add(c);
             }
             contador++;
@@ -63,18 +68,21 @@ public class Relatorio {
 
     // relatório 8
     public void primeiroUltimoPartidos() {
+        //ordena a lista de candidatos dentro da cada partido
         for(Partido p: partidosOrdenadosEleito){
             p.ordenaCandidatos();
         }
 
-        LinkedList<Candidato> candidatosMaisVotados = new LinkedList<>();
+        List<Candidato> candidatosMaisVotados = new LinkedList<>();
 
+        //coleta o candidato mais votado em cada partido, se possuir candidato
         for(Partido p: partidosOrdenadosEleito){
             if(p.getCandidatos().size()>0){
                 candidatosMaisVotados.add(p.getCandidatos().getFirst());
             }   
         }
 
+        //ordena a lista por numero de votos
         candidatosMaisVotados.sort(null);
 
         imprime.primeiroUltimoPartidos(candidatosMaisVotados);

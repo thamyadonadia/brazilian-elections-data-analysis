@@ -1,13 +1,14 @@
 package br.ufes.afonsothamya.deputados.registrados;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class Partido implements Comparable<Partido> {
     private int cargo;
     private int numVotos; // votos de legenda
     private String siglaPartido;
     private int numPartido;
-    private LinkedList<Candidato> candidatos;
+    private List<Candidato> candidatos;
 
     public Partido(int cargo, int numPartido, String siglaPartido) {
         this.cargo = cargo;

@@ -3,13 +3,15 @@ package br.ufes.afonsothamya.deputados.eleicao;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import br.ufes.afonsothamya.deputados.registrados.*;
 
 public class Eleicao {
-    private HashMap<Integer, Candidato> candidatos;
+    private Map<Integer, Candidato> candidatos;
     private LocalDate dia;
-    private LinkedList<Partido> partidos;
+    private List<Partido> partidos;
     private String tipoConsulta;
     private int vagas;
 
@@ -27,7 +29,9 @@ public class Eleicao {
 
     public void adicionaCandidatos(Candidato pessoa) {
         candidatos.put(pessoa.getNúmeroUrna(), pessoa);
-        if ((pessoa.getSituaçãoEleitoral() == 2) || (pessoa.getSituaçãoEleitoral() == 3)) {
+        //verifica se é eleito para incrementar
+        //o numero de vagas na eleição
+        if (pessoa.ehEleito()) {
             this.vagas++;
         }
     }
@@ -52,23 +56,29 @@ public class Eleicao {
     public int getVagas() {
         return vagas;
     }
+
     public Partido temEssePartido(String nm_Partido) {
+        //percorre lista de partidos da eleição em busca de um
+        //com o mesmo nome do partido, se encontrar retorna tal
         for (Partido p : partidos) {
             if (p.getSiglaPartido().equals(nm_Partido)) {
                 return p;
             }
         }
-
+        //senão, retorna nulo
         return null;
     }
 
     // rever nome 
     public Partido temEssePartido(int nr_Partido) {
+        //percorre lista de partidos da eleição em busca de um
+        //com o mesmo numero de urna do partido, se encontrar retorna tal
         for (Partido p : partidos) {
             if (p.getNumPartido() == nr_Partido) {
                 return p;
             }
         }
+        //senão, retorna nulo
         return null;
     }
 
@@ -79,6 +89,8 @@ public class Eleicao {
     public int getNumeroCandidatosEleitos(){
         int numCandidatosEleitos = 0;
         
+        //verifica dentro da lista de candidatos 
+        //todos que possuem o status eleito
         for(Candidato c: this.getCandidatos()){
             if(c.ehEleito()){
                 numCandidatosEleitos++;
