@@ -54,6 +54,7 @@ public class Partido implements Comparable<Partido> {
         candidatos.add(c);
     }
 
+    // coleta a quantidade de votos de cada candidato
     public int getQtdVotosNominais() {
         int votosN = 0;
         for (Candidato c : candidatos) {
@@ -62,6 +63,7 @@ public class Partido implements Comparable<Partido> {
         return votosN;
     }
 
+    // percorre a lista de candidatos e incrementa se for eleito
     public int getNmrCandidatosEleitos() {
         int eleitos = 0;
         for (Candidato c : candidatos) {
@@ -71,10 +73,13 @@ public class Partido implements Comparable<Partido> {
         return eleitos;
     }
 
+    // retorna uma copia da lsita de candidatos
     public LinkedList<Candidato> getCandidatos(){
         return new LinkedList<Candidato>(candidatos);
     }
 
+    // compara o numero total de votos, se igual
+    // da preferência ao numero com menor num de urna
     @Override
     public int compareTo(Partido o) {
         int result = (o.getQtdVotosNominais() + o.getnumVotos()) - (this.getQtdVotosNominais() + this.getnumVotos());

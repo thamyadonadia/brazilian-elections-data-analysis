@@ -16,8 +16,10 @@ public class Relatorio {
 
     public Relatorio(Eleicao deputados) {
         this.deputados = deputados;
+        // armazena uma lista ordenada de deputados
         candidatosOrdenadosVoto = deputados.getCandidatos();
         candidatosOrdenadosVoto.sort(null);
+        // faz o mesmo com partidos
         partidosOrdenadosEleito = deputados.getPartidos();
         partidosOrdenadosEleito.sort(null);
         imprime = new Impressora();
@@ -97,10 +99,12 @@ public class Relatorio {
 
         for(Candidato c: deputados.getCandidatos()){
             if(c.ehEleito()){
-                
+
+                // calcula a idade de cada candidato
                 periodo = Period.between(c.getNascimento(), deputados.getDia());
                 idade = periodo.getYears();
 
+                // contabiliza em um veto
                 if(idade < 30) divisaoIdade[0]++;
                 else if(idade < 40) divisaoIdade[1]++;
                 else if(idade < 50) divisaoIdade[2]++;
@@ -109,6 +113,7 @@ public class Relatorio {
             }
         }
         
+        // calcula as porcentagens
         porcentagemIdade[0] = (divisaoIdade[0] / totalCandidatosEleitos) * 100;
         porcentagemIdade[1] = (divisaoIdade[1] / totalCandidatosEleitos) * 100;
         porcentagemIdade[2] = (divisaoIdade[2] / totalCandidatosEleitos) * 100;
@@ -126,11 +131,13 @@ public class Relatorio {
         
         for(Candidato c : deputados.getCandidatos()){
             if(c.ehEleito()){
+                //contabiliza homens e mulheres
                 if(c.getGenero() == 2) totalHomensEleitos++;
                 else if(c.getGenero() == 4) totalMulheresEleitas++;  
             }
         }   
 
+        //calcula as porcentagens
         double porcentagemHomens = (totalHomensEleitos / totalCandidatosEleitos) * 100;
         double porcentagemMulheres = (totalMulheresEleitas / totalCandidatosEleitos) * 100;
        
@@ -142,14 +149,17 @@ public class Relatorio {
         int totalVotosValidos = 0, totalVotosNominais = 0, totalVotosLegenda = 0;
         double porcentagemVotosNominais, porcentagemVotosLegenda;
 
+        // coleta o numero de votos totais de legenda de cada partido
         for(Partido p: deputados.getPartidos()){
             totalVotosLegenda += p.getnumVotos();
         }
 
+        // coleta o numero de votos totais normais de cada candidato
         for(Candidato c: deputados.getCandidatos()){
             totalVotosNominais += c.getNumVotos();
         }
 
+        // calcula o total de votos validos e as porcentagens
         totalVotosValidos = totalVotosLegenda + totalVotosNominais;
         porcentagemVotosLegenda = ((double)totalVotosLegenda / (double)totalVotosValidos) * 100;
         porcentagemVotosNominais = ((double)totalVotosNominais / (double)totalVotosValidos) * 100;

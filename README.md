@@ -25,10 +25,10 @@
 ### A comentar
 - [X] Eleicao
 - [X] Impressora
-- [ ] Leitor
+- [X] Leitor
 - [X] Candidato
-- [ ] Partido
-- [ ] Relatorio
+- [X] Partido
+- [X] Relatorio
 - [ ] App
 
 

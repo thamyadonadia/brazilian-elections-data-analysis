@@ -65,6 +65,7 @@ public class Leitor {
                     deputados.adicionaPartidos(grupo);
                 }
 
+                //se condizer com o cargo a ser analisado e for valido
                 if (cargo == adaptaStringInt(colunas[13])
                         && (2 == adaptaStringInt(colunas[68]) || 16 == adaptaStringInt(colunas[68])
                                 || 1 == adaptaDestinoInt(colunas[67]))) {
@@ -116,14 +117,17 @@ public class Leitor {
                     // coluna 19 representa o número de urna do candidato == key pra hash map
                     pessoa = deputados.getCandidatoKey(adaptaStringInt(colunas[19]));
 
+                    // se não for encontrado um candidato com tal número de urna
                     if (pessoa == null) {
                         grupo = deputados.temEssePartido(adaptaStringInt(colunas[19]));
 
+                        // se condizer com o número de algum partido
                         if (grupo != null) {
                             grupo.addNumVotos(adaptaStringInt(colunas[21]));
                         }
 
                     } else {
+                        // verifica se o candidato tem o destino de voto para seu partido
                         if (pessoa.getDestinoVotos() == 1) {
                             pessoa.getRelaçãoPartidária().addNumVotos(adaptaStringInt(colunas[21]));
                         } else {
@@ -141,6 +145,7 @@ public class Leitor {
         }
     }
 
+    // transforma a formatação da string do csv para uma variavel de tipo Integer
     public static Integer adaptaStringInt(String numero) {
         int result;
 
@@ -148,6 +153,7 @@ public class Leitor {
         return result;
     }
 
+    // transforma a string em um Integer indicando o destino do voto
     public static Integer adaptaDestinoInt(String codigo) {
         String codigoResult;
 
