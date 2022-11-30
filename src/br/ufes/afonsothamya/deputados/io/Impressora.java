@@ -9,14 +9,21 @@ import br.ufes.afonsothamya.deputados.registrados.*;
 
 public class Impressora {
 
-    // relatório 1
-    // imprime o número de vagas da eleição
+    /**
+     * Imprime o número de vagas da eleição
+     * <li>referente ao relatório 01
+     * @param numVagas da eleição
+     */
     public void numeroVagas(int numVagas) {
         System.out.println("Número de vagas: " + numVagas + "\n");
     }
 
-    // relatório 2
-    // imprime os candidatos eleitos
+    /**
+     * Imprime os candidatos eleitos.
+     * <li>referente ao relatório 02
+     * @param deputados Eleição a ser prcessada
+     * @param candidatosOrdenados Lista de candidatos ordenada por voto
+     */
     public void candidatosEleitos(Eleicao deputados, List<Candidato> candidatosOrdenados) {
         NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
         int contador = 1;
@@ -41,9 +48,14 @@ public class Impressora {
         System.out.printf("\n");
     }
 
-    // relatório 3, 4 e 5
-    // imprime candidatos mais votados e diferenças
-    // entre esta lista e a lista de eleitos
+    /**
+     * Imprime candidatos mais votados e diferenças entre a lista e os eleitos.
+     * <li>referente ao relatório 03, 04 e 05
+     * @param candidatosOrdenadosVotos Lista de candidatos ordenada por voto com o tamanho de vagas
+     * @param prejudicados Lista de pessoas prejudicadas pelo sistema atual
+     * @param beneficiados Lista de pessoas beneficiadas pelo sistema atual
+     * @param candidatosOrdenadosVotosTotal Lista de candidatos da eleição ordenada por voto
+     */
     public void candidatosMaisVotados(List<Candidato> candidatosOrdenadosVotos, List<Candidato> prejudicados, List<Candidato> beneficiados, List<Candidato> candidatosOrdenadosVotosTotal) {
         NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
         int contador = 1; 
@@ -83,8 +95,13 @@ public class Impressora {
         }
     }
 
-    // impressão do relatório 6
-    // informação geral dos partidos (votos e candidatos eleitos)
+    /**
+     * Imprime informação geral dos partidos
+     * <li> votos e candidatos eleitos de cada partido
+     * <li>referente ao relaorio 06
+     * @param deputados Eleição a ser processada
+     * @param partidosOrdenados Lista de partidos ordenado por voto
+     */
     public void partidoVotos(Eleicao deputados, List<Partido> partidosOrdenados) {
         NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
         int contador = 1; int totalVotos = 0; int eleitos = 0;
@@ -114,8 +131,12 @@ public class Impressora {
         }
     }
 
-    // relatório 8
-    // primeiro e último colocado de cada partido por ordem de votos
+
+    /**
+     * Imprime primero e último colocado em cada partido
+     * <li>referente ao relatório 08
+     * @param candidatosMaisVotados lista de candidatos ordenados
+     */
     public void primeiroUltimoPartidos(List<Candidato> candidatosMaisVotados) {
         NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
         int contador = 1;
@@ -142,8 +163,12 @@ public class Impressora {
         }
     }
 
-    // relatório 9
-    // distribuição de eleitos por idade
+    /**
+     * Imprime a distribuição dos eleitos por idade
+     * <li>referente ao relatório 09
+     * @param divisaoIdade vetor de numero de eleitos
+     * @param porcentagemIdade vetor de porcentagem de eleitos
+     */
     public void distribuicaoEleitosPorIdade(double divisaoIdade[], double porcentagemIdade[]){
         NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
         nf.setMinimumFractionDigits(2); nf.setMaximumFractionDigits(2);
@@ -157,8 +182,14 @@ public class Impressora {
         System.out.println("60 <= Idade     : " + (int)divisaoIdade[4] + " (" + nf.format(porcentagemIdade[4]) + "%)");
     }
 
-    // relatório 10
-    // distribuição de eleitos por sexo
+    /**
+     * Imprime a distribuição dos eleitos por sexo
+     * <li>referente ao relatório 10
+     * @param totalMulheresEleitas
+     * @param porcentagemMulheres
+     * @param totalHomensEleitos
+     * @param porcentagemHomens
+     */
     public void distribuicaoEleitosPorSexo(double totalMulheresEleitas, double porcentagemMulheres, double totalHomensEleitos, double porcentagemHomens){
         NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
         nf.setMinimumFractionDigits(2); nf.setMaximumFractionDigits(2);
@@ -168,8 +199,15 @@ public class Impressora {
         System.out.println("Masculino: " + (int)totalHomensEleitos + " (" + nf.format(porcentagemHomens) + "%)");
     }
 
-    // relatório 11
-    // total de votos, votos nominais e votos de legenda
+    /**
+     * Imprime total de votos totais, nominais e de legenda
+     * <li> referente ao relatório 11
+     * @param totalVotosValidos 
+     * @param totalVotosNominais
+     * @param totalVotosLegenda
+     * @param porcentagemVotosNominais
+     * @param porcentagemVotosLegenda
+     */
     public void distribuicaoVotos(int totalVotosValidos, int totalVotosNominais, int totalVotosLegenda, double porcentagemVotosNominais, double porcentagemVotosLegenda){
         NumberFormat nfPorcentagem = NumberFormat.getInstance(Locale.forLanguageTag("pt-BR"));
         nfPorcentagem.setMinimumFractionDigits(2);nfPorcentagem.setMaximumFractionDigits(2);

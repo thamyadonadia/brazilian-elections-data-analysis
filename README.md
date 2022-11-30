@@ -22,14 +22,14 @@
 - [ ] Escrever relatório
 - [X] Montar makefile 
 
-### A comentar
+### A comentar com Javadoc
 - [X] Eleicao
 - [X] Impressora
 - [X] Leitor
 - [X] Candidato
 - [X] Partido
-- [X] Relatorio
-- [ ] App
+- [ ] Relatorio
+- [X] App
 
 
 ### Dúvidas 

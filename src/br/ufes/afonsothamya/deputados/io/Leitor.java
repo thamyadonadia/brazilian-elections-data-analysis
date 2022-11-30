@@ -15,8 +15,7 @@ public class Leitor {
     BufferedReader brArquivoCandidatos;
     BufferedReader brArquivoVotos;
 
-    // TODO: tratar corretamente a UnsupportedEncondingException
-    public Leitor(String caminhoArquivoCandidatos, String caminhoArquivoVotos) throws UnsupportedEncodingException {
+    public Leitor(String caminhoArquivoCandidatos, String caminhoArquivoVotos) {
         try {
             this.isArquivoCandidatos = new FileInputStream(caminhoArquivoCandidatos);
             this.isrArquivoCandidatos = new InputStreamReader(isArquivoCandidatos, "ISO-8859-1");
@@ -24,6 +23,9 @@ public class Leitor {
 
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo " + caminhoArquivoCandidatos + " não foi encontrado!");
+            System.exit(1);
+        } catch (UnsupportedEncodingException e) {
+            System.out.println("Erro interno");
             System.exit(1);
         }
 
@@ -35,10 +37,17 @@ public class Leitor {
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo " + caminhoArquivoVotos + " não foi encontrado!");
             System.exit(1);
+        } catch (UnsupportedEncodingException e) {
+            System.out.println("Erro interno");
+            System.exit(1);
         }
     }
 
-    // função para realizar a leitura dos arquivos
+    /**
+     * Faz a leitura de candidatos do arquivo marcado e registra na eleição.
+     * 
+     * @param deputados eleição a ser processada
+     */
     public void leituraCandidatos(Eleicao deputados) {
         int cargo;
         String[] colunas;
@@ -92,7 +101,12 @@ public class Leitor {
         }
     }
 
-    // função para realizar a leitura do arquivo de votos
+    /**
+     * Função para realizar a leitura do arquivo de votos.
+     * <li>os votos são lidos e inseridos em seus respectivos candidatos
+     * e partidos 
+     * @param deputados eleição a ser processada
+     */
     public void leituraVotos(Eleicao deputados) {
         int cargo;
         String[] colunas;
@@ -145,7 +159,11 @@ public class Leitor {
         }
     }
 
-    // transforma a formatação da string do csv para uma variavel de tipo Integer
+    /**
+     * Transforma a formatação da string do csv para um Integer.
+     * @param numero a ser formatado em Integrer
+     * @return numero formatado
+     */
     public static Integer adaptaStringInt(String numero) {
         int result;
 
@@ -153,7 +171,12 @@ public class Leitor {
         return result;
     }
 
-    // transforma a string em um Integer indicando o destino do voto
+    /**
+     * Transforma a string em um Integer indicando o destino do voto.
+     * <li>1 para votos de legenda, 0 para normais
+     * @param codigo do destino de votos a ser processado
+     * @return modalidade de voto
+     */
     public static Integer adaptaDestinoInt(String codigo) {
         String codigoResult;
 

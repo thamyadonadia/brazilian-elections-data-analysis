@@ -54,7 +54,11 @@ public class Partido implements Comparable<Partido> {
         candidatos.add(c);
     }
 
-    // coleta a quantidade de votos de cada candidato
+    /**
+     * Coleta a soma votos de cada candidato
+     * 
+     * @return numero de votos nominais
+     */
     public int getQtdVotosNominais() {
         int votosN = 0;
         for (Candidato c : candidatos) {
@@ -63,7 +67,14 @@ public class Partido implements Comparable<Partido> {
         return votosN;
     }
 
-    // percorre a lista de candidatos e incrementa se for eleito
+    /**
+     * Retorna numero de candidatos do partido que foram eleitos
+     * 
+     * <li>Percorre a lista e incrementa caso a função ehEleito 
+     * retorne verdadeiro
+     * 
+     * @return numero de candidatos eleitos
+     */
     public int getNmrCandidatosEleitos() {
         int eleitos = 0;
         for (Candidato c : candidatos) {
@@ -73,13 +84,22 @@ public class Partido implements Comparable<Partido> {
         return eleitos;
     }
 
-    // retorna uma copia da lsita de candidatos
+    /**
+     * Retorna uma lista encadeada nova de candidatos.
+     *
+     * @return cópia de lista de candidatos
+     */
     public LinkedList<Candidato> getCandidatos(){
         return new LinkedList<Candidato>(candidatos);
     }
 
-    // compara o numero total de votos, se igual
-    // da preferência ao numero com menor num de urna
+    /**
+     * Compara partidos pelo total de votos.
+     * 
+     * @param o partido a ser comparado
+     * 
+     * @return -1 se menor, 0 se igual, 1 se maior
+     */
     @Override
     public int compareTo(Partido o) {
         int result = (o.getQtdVotosNominais() + o.getnumVotos()) - (this.getQtdVotosNominais() + this.getnumVotos());
@@ -88,7 +108,9 @@ public class Partido implements Comparable<Partido> {
         else return this.getNumPartido() - o.getNumPartido();
     }
 
-    // ordena os candidatos dentro de um mesmo partido
+    /**
+     * Ordena os candidatos dentro da lista de candidatos do partido.
+     */
     public void ordenaCandidatos(){
         candidatos.sort(null);
     }

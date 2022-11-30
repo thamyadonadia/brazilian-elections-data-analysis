@@ -27,10 +27,13 @@ public class Eleicao {
         return new LinkedList<Candidato>(candidatos.values());
     }
 
+    /**
+     * Adiciona candidato a eleição
+     * <li>se for eleito, incrementa numero de vagas
+     * @param pessoa a ser adicionada
+     */
     public void adicionaCandidatos(Candidato pessoa) {
         candidatos.put(pessoa.getNúmeroUrna(), pessoa);
-        //verifica se é eleito para incrementar
-        //o numero de vagas na eleição
         if (pessoa.ehEleito()) {
             this.vagas++;
         }
@@ -57,9 +60,12 @@ public class Eleicao {
         return vagas;
     }
 
+    /**
+     * Percorre a lista de Eleição e verifica se há partido com o nome.
+     * @param nm_Partido nome do partido a ser procurado
+     * @return Partido com nome inserido, senão houver, nulo
+     */
     public Partido temEssePartido(String nm_Partido) {
-        //percorre lista de partidos da eleição em busca de um
-        //com o mesmo nome do partido, se encontrar retorna tal
         for (Partido p : partidos) {
             if (p.getSiglaPartido().equals(nm_Partido)) {
                 return p;
@@ -69,16 +75,17 @@ public class Eleicao {
         return null;
     }
 
-    // rever nome 
+    /**
+     * Percorre a lista de Eleição e verifica se há partido com o número.
+     * @param nr_Partido número do partido a ser procurado
+     * @return Partido com número inserido, senão houver, nulo
+     */ 
     public Partido temEssePartido(int nr_Partido) {
-        //percorre lista de partidos da eleição em busca de um
-        //com o mesmo numero de urna do partido, se encontrar retorna tal
         for (Partido p : partidos) {
             if (p.getNumPartido() == nr_Partido) {
                 return p;
             }
         }
-        //senão, retorna nulo
         return null;
     }
 
@@ -86,11 +93,13 @@ public class Eleicao {
         return this.candidatos.get(nr_votavel);
     }
 
+    /**
+     * Percorre lista de candidatos e retorna número de eleitos
+     * @return número de candidatos eleitos
+     */
     public int getNumeroCandidatosEleitos(){
         int numCandidatosEleitos = 0;
         
-        //verifica dentro da lista de candidatos 
-        //todos que possuem o status eleito
         for(Candidato c: this.getCandidatos()){
             if(c.ehEleito()){
                 numCandidatosEleitos++;
