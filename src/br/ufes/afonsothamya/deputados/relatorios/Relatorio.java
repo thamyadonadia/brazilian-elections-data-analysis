@@ -25,17 +25,27 @@ public class Relatorio {
         imprime = new Impressora();
     }
 
-    // relatório 1
+    /**
+     * Coleta o número de vagas e passa para impressora
+     * <li>referente ao relatório 01
+     */
     public void numeroVagas() {
         imprime.numeroVagas(deputados.getVagas());
     }
 
-    // relatório 2
+    /**
+     * Coleta a lista ordenada de candidatos e passa para impressora
+     * <li>referente ao relatório 02
+     */
     public void deputadosEleitos() {
         imprime.candidatosEleitos(deputados, candidatosOrdenadosVoto);
     }
 
-    // relatórios 3, 4 e 5
+    /**
+     * Percorre a lista de candidadtos para coletar dados e passa para impressora
+     * <li>coleta os candidatos prejudicados e beneficiados pelo sistema de eleição
+     * <li>referente aos relatórios 03 ,04 e 05
+     */
     public void deputadosMaisVotados() {
         List<Candidato> prejudicados = new LinkedList<>();
         List<Candidato> beneficiados = new LinkedList<>();
@@ -63,12 +73,19 @@ public class Relatorio {
         imprime.candidatosMaisVotados(candidatosOrdenadosVotosTotal, prejudicados, beneficiados, candidatosOrdenadosVoto);
     }
 
-    // relatório 6
+    /**
+     * Coleta os partidos mais votados e passa para impressora
+     * <li>referente ao relatório 06
+     */
     public void partidosEleitos() {
         imprime.partidoVotos(deputados, partidosOrdenadosEleito);
     }
 
-    // relatório 8
+    /**
+     * Ordena os candidatos de cada partido, coleta o mais votado de cada e passa para
+     * impressora
+     * <li>referente ao relatório 08
+     */
     public void primeiroUltimoPartidos() {
         //ordena a lista de candidatos dentro da cada partido
         for(Partido p: partidosOrdenadosEleito){
@@ -90,7 +107,10 @@ public class Relatorio {
         imprime.primeiroUltimoPartidos(candidatosMaisVotados);
     }
 
-    // relatório 9
+    /**
+     * Calcula dados sobre idade dos eleitos, passa os dados para impressora
+     * <li>referente ao relatório 09
+     */
     public void eleitosPorIdade(){
         double divisaoIdade[] = new double[5]; 
         double porcentagemIdade[] = new double[5];
@@ -123,7 +143,10 @@ public class Relatorio {
         imprime.distribuicaoEleitosPorIdade(divisaoIdade, porcentagemIdade);
     }
 
-    // relatório 10
+    /**
+     * Calcula dados sobre o sexo dos eleitos, passsa os dados para impressora
+     * <li>referente ao relatório 10
+     */
     public void eleitosPorSexo(){
         double totalCandidatosEleitos = deputados.getNumeroCandidatosEleitos();
         double totalMulheresEleitas = 0; 
@@ -144,7 +167,10 @@ public class Relatorio {
         imprime.distribuicaoEleitosPorSexo(totalMulheresEleitas, porcentagemMulheres, totalHomensEleitos, porcentagemHomens);
     }
 
-    // relatório 11
+    /**
+     * Calcula a distribuição dos votos pela eleição, passa para impressora
+     * <li>referente ao relatório 11
+     */
     public void distribuicaoVotos(){
         int totalVotosValidos = 0, totalVotosNominais = 0, totalVotosLegenda = 0;
         double porcentagemVotosNominais, porcentagemVotosLegenda;

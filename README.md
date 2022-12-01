@@ -16,9 +16,9 @@
 ### Etapas 
 - [X] Arquitetura do projeto     
 - [X] Implementação do projeto    
-- [ ] Tratamento de exceções    
+- [X] Tratamento de exceções    
 - [X] Refatoramento do código
-- [ ] Comentar código    
+- [X] Comentar código    
 - [ ] Escrever relatório
 - [X] Montar makefile 
 
@@ -28,7 +28,7 @@
 - [X] Leitor
 - [X] Candidato
 - [X] Partido
-- [ ] Relatorio
+- [X] Relatorio
 - [X] App
 
 
