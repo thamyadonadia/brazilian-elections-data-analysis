@@ -4,49 +4,50 @@ Eleicao -> "0..*" Candidato : Mapeia >
 Eleicao -> "0..*" Partido : Lista >
 
 class Eleicao{
-    dia : LocalDate
-    tipoConsulta : String
-    vagas : int
+    -dia : LocalDate
+    -tipoConsulta : String
+    -vagas : int
 }
 
 class Impresora
 
 class Leitor{
-    isArquivoCandidatos : InputStream
-    isArquivoVotos : InputStream
-    isrArquivoCandidatos : InputStreamReader
-    isrArquivoVotos : InputStreamReader
-    brArquivoCandidatos : BufferedReader
-    brArquivoVotos : BufferedReader
+    -isArquivoCandidatos : InputStream
+    -isArquivoVotos : InputStream
+    -isrArquivoCandidatos : InputStreamReader
+    -isrArquivoVotos : InputStreamReader
+    -brArquivoCandidatos : BufferedReader
+    -brArquivoVotos : BufferedReader
 }
+note bottom of Leitor: Acessado diretamente pelo App
 
 Candidato "0..*" <--> "1" Partido : Participa de >
  
 class Candidato{
-    nomeUrna : String
-    nomeCompleto : String
-    cargo : int
-    númeroUrna : int
-    numPartido : int
-    siglaPartido : String
-    nascimento : LocalDate
-    situaçãoEleitoral : int
-    genero : int
-    numFederação : int
-    numVotos : int
-    destinoVotos : int
+    -nomeUrna : String
+    -nomeCompleto : String
+    -cargo : int
+    -númeroUrna : int
+    -numPartido : int
+    -siglaPartido : String
+    -nascimento : LocalDate
+    -situaçãoEleitoral : int
+    -genero : int
+    -numFederação : int
+    -numVotos : int
+    -destinoVotos : int
 }
 
 class Partido{
-    cargo : int
-    numVotos : int
-    siglaPartido : String
-    numPartido : int
+    -cargo : int
+    -numVotos : int
+    -siglaPartido : String
+    -numPartido : int
 }
 
-Relatorio -> "1" Eleicao : analisa >
-Relatorio -> "1" Impresora : Imprime através >
-Relatorio --> "0..*" Candidato : Ordena > 
+Relatorio -> "1" Eleicao : Analisa >
+Relatorio -left> "1" Impresora : Imprime através >
+Relatorio --right> "0..*" Candidato : Ordena > 
 Relatorio --> "0..*" Partido : Ordena >
 
 

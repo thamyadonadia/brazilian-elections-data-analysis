@@ -11,7 +11,7 @@
 ### Tarefas 
 - [X] Estudar leitura de arquivos      
 - [X] Estudar sobre o .jar - tentar ver material do JP
-- [ ] Mudar nome das variáveis 
+- [X] Mudar nome das variáveis 
 
 ### Etapas 
 - [X] Arquitetura do projeto     
@@ -19,7 +19,7 @@
 - [X] Tratamento de exceções    
 - [X] Refatoramento do código
 - [X] Comentar código    
-- [ ] Escrever relatório
+- [X] Escrever relatório
 - [X] Montar makefile 
 
 ### A comentar com Javadoc

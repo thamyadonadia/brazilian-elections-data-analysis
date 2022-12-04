@@ -8,7 +8,7 @@ import br.ufes.afonsothamya.deputados.io.Leitor;
 import br.ufes.afonsothamya.deputados.relatorios.Relatorio;
 
 public class App {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
         // verificação de argumentos
         if (args.length != 4) {
