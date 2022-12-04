@@ -1,40 +1,4 @@
-## Organização do Trabalho 01 
+## Data Analysis of the Brazilian Elections
+> Owners: Afonso Salvador de Magalhaẽs and Thamya Vieira Hashimoto Donadia
 
-### Arquivos
-- [X] App.java - contém a main e organiza os parâmetros     
-- [X] Candidato.java - informações de cada candidato OK     
-- [X] Partido.java - informações de cada partido OK     
-- [X] Leitor.java - a ver sobre       
-- [X] Eleição.java - informações da eleição no estado -  hashmap      
-- [X] Relatório.java - gerador de relatórios      
-    
-### Tarefas 
-- [X] Estudar leitura de arquivos      
-- [X] Estudar sobre o .jar - tentar ver material do JP
-- [X] Mudar nome das variáveis 
-
-### Etapas 
-- [X] Arquitetura do projeto     
-- [X] Implementação do projeto    
-- [X] Tratamento de exceções    
-- [X] Refatoramento do código
-- [X] Comentar código    
-- [X] Escrever relatório
-- [X] Montar makefile 
-
-### A comentar com Javadoc
-- [X] Eleicao
-- [X] Impressora
-- [X] Leitor
-- [X] Candidato
-- [X] Partido
-- [X] Relatorio
-- [X] App
-
-
-### Dúvidas 
-- Implementar interface, herança e classe abstrata?? --Não necessário
-- Nos packages, precisa ser src/br/ufes/"nosso nome"/deputados --Resolvido
-
-### Extra
-- Para rodar o .jar: java -jar brazilian-elections-data-analysis.jar --estadual tests/consulta_cand_2022_ES.csv tests/votacao_secao_2022_ES.csv 15/11/2022
+Implementing Object Oriented Programming by developing reports surrounding the data of brazilian congressmen elections.
